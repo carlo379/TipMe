@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		0723AA341F451312007D2EB1 /* testViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0723AA331F451312007D2EB1 /* testViewController.swift */; };
 		074ED58F1F44159D006B623C /* TipViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 074ED58E1F44159D006B623C /* TipViewController.swift */; };
 		074ED5911F441659006B623C /* SettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 074ED5901F441659006B623C /* SettingsViewController.swift */; };
 		074ED5931F4416B4006B623C /* Help.swift in Sources */ = {isa = PBXBuildFile; fileRef = 074ED5921F4416B4006B623C /* Help.swift */; };
@@ -29,6 +30,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		0723AA331F451312007D2EB1 /* testViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = testViewController.swift; sourceTree = "<group>"; };
 		074ED58E1F44159D006B623C /* TipViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TipViewController.swift; sourceTree = "<group>"; };
 		074ED5901F441659006B623C /* SettingsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingsViewController.swift; sourceTree = "<group>"; };
 		074ED5921F4416B4006B623C /* Help.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Help.swift; sourceTree = "<group>"; };
@@ -123,6 +125,7 @@
 			children = (
 				074ED58E1F44159D006B623C /* TipViewController.swift */,
 				074ED5901F441659006B623C /* SettingsViewController.swift */,
+				0723AA331F451312007D2EB1 /* testViewController.swift */,
 			);
 			name = Controller;
 			sourceTree = "<group>";
@@ -242,6 +245,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				0723AA341F451312007D2EB1 /* testViewController.swift in Sources */,
 				074ED5931F4416B4006B623C /* Help.swift in Sources */,
 				079A9F791F43EF6200B9B610 /* TipCalc.swift in Sources */,
 				074ED58F1F44159D006B623C /* TipViewController.swift in Sources */,

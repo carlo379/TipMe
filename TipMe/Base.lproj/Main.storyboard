@@ -93,7 +93,7 @@
                     <navigationItem key="navigationItem" title="Tip Calculator" id="0x3-PJ-RMb">
                         <barButtonItem key="rightBarButtonItem" title="Settings" id="IoF-dd-oYD">
                             <connections>
-                                <segue destination="j9Q-xe-wIm" kind="show" id="RBu-eH-HiI">
+                                <segue destination="j9Q-xe-wIm" kind="show" identifier="TipToSettingsSegue" id="RBu-eH-HiI">
                                     <nil key="action"/>
                                 </segue>
                             </connections>

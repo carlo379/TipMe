@@ -16,39 +16,45 @@ class TipMeTests: XCTestCase {
         super.setUp()
         
         let MIN_VAL = Float(10)
-        let MAX_VAL = Float(20)
         let DEFAULT = Float(15)
-        
+        let MAX_VAL = Float(20)
+
         tipCalc = TipCalc(withMinTip: MIN_VAL, maxTip: MAX_VAL, defaultTip: DEFAULT)
         XCTAssertNotNil(tipCalc, "Found nil after initialization.")
-        XCTAssert(tipCalc!.minTip == MIN_VAL, "Incorrect Initialization of minimum tip value.")
-        XCTAssert(tipCalc!.maxTip == MAX_VAL, "Incorrect Initialization of maximum tip value.")
-        XCTAssert(tipCalc!.defaultTip == DEFAULT, "Incorrect Initialization of default tip value.")
-        guard let tipCalc = tipCalc else { return }
-
-        tipCalc.bill = 100.00
-        tipCalc.percentage = 10.00
+        XCTAssert(tipCalc?.tipRangeValues[0] == MIN_VAL,"Tip Range Values not correctly initialized")
+        XCTAssert(tipCalc?.tipRangeValues[1] == DEFAULT,"Tip Range Values not correctly initialized")
+        XCTAssert(tipCalc?.tipRangeValues[2] == MAX_VAL,"Tip Range Values not correctly initialized")
     }
     
     override func tearDown(){
         // Put teardown code here. This method is called after the invocation of each test method in the class.
         super.tearDown()
+        tipCalc = nil
     }
     
-    func testTip() {
+    func testTipAndTotalUsingPercentage() {
         guard let tipCalc = tipCalc else { return }
+        
+        let bill = Float(100)
+        let percentage = Float(12)
 
-        let tip = tipCalc.getTip()
-        XCTAssert(tip == Float(10), "Incorrect Tip Calculation")
+        let tipAndTotalUsingPercentage = tipCalc.getTipAndTotal(fromBill: bill, andPercentage: percentage)
+
+        XCTAssert(tipAndTotalUsingPercentage.tip == Float(12), "Incorrect Tip Calculation")
+        XCTAssert(tipAndTotalUsingPercentage.total == Float(112), "Incorrect Total Bill Calculation")
+
     }
     
-    func testTotalBill() {
+    func testTipAndTotalUsingDecimalPercentage() {
         guard let tipCalc = tipCalc else { return }
-
-        if let totalBill = tipCalc.getTotalBill(){
-            XCTAssert(totalBill == Float(110), "Incorrect Total Bill Calculation")
-        } else {
-            XCTAssertNotNil(tipCalc.getTotalBill()!, "Bill Calculation was nil")
-        }
+        
+        let bill = Float(100)
+        let decimalPercentage = Float(0.12)
+        
+        let tipAndTotalUsingDecimalPercentage = tipCalc.getTipAndTotal(fromBill: bill, andPercentage: decimalPercentage)
+        
+        XCTAssert(tipAndTotalUsingDecimalPercentage.tip == Float(12), "Incorrect Tip Calculation using decimal percentage")
+        XCTAssert(tipAndTotalUsingDecimalPercentage.total == Float(112), "Incorrect Total Bill Calculation using decimal percentage")
+        
     }
 }

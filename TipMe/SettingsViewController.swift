@@ -9,56 +9,55 @@
 import UIKit
 
 class SettingsViewController: UIViewController {
-
+    // MARK: - Properties
     @IBOutlet weak var defaultTipLb: UILabel!
     @IBOutlet weak var minTF: UITextField!
     @IBOutlet weak var maxTF: UITextField!
     @IBOutlet weak var tipSlider: UISlider!
-    var incrementStep = Float(1)
     
-    //  Unwrapping because are init on 'viewDidLoad'
-    var minTip:Float!
-    var maxTip:Float!
-    var defaultTip:Float! {
-        didSet {
-            defaultTipLb.text = String(format: "%.0f", defaultTip)+"%"
-        }
-    }
+    var tipCalc:TipCalc?
+    let incrementStep = Float(1)
     
+    // MARK: - View Controller Life Cycle
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        let defaults = UserDefaults.standard
-        minTip =  Help().isKeyPresentInUserDefaults(key: "TIP_MIN") ? defaults.float(forKey: "TIP_MIN") : 10
-        minTF.text = String(format: "%.0f",minTip)
-        
-        maxTip =  Help().isKeyPresentInUserDefaults(key: "TIP_MAX") ? defaults.float(forKey: "TIP_MAX") : 20
-        maxTF.text = String(format: "%.0f",maxTip)
-        
-        defaultTip =  Help().isKeyPresentInUserDefaults(key: "TIP_DEFAULT") ? defaults.float(forKey: "TIP_DEFAULT") : 15
+        if  let min = tipCalc?.tipRangeValues[0],
+            let def = tipCalc?.tipRangeValues[1],
+            let max = tipCalc?.tipRangeValues[2] {
+            
+            minTF.text = String(format: "%.0f",min)
+            maxTF.text = String(format: "%.0f",max)
+            defaultTipLb.text = String(format: "%.0f", def)+"%"
+        } else {
+            _ = navigationController?.popViewController(animated: true)
+        }
     }
     
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
-    }
-    
+    // MARK: - IBActions
     @IBAction func sliderChanged(_ sender: Any) {
-        minTip = Float(minTF.text!) ?? 10
-        maxTip = Float(maxTF.text!) ?? 20
-        
-        tipSlider.maximumValue = maxTip
-        tipSlider.minimumValue = minTip
-        
-        if let slider = sender as? UISlider {
-            defaultTip = round(slider.value / incrementStep) * incrementStep
-            slider.value = defaultTip
+        if let minText = minTF.text, let min = Float(minText) {
+            tipCalc?.tipRangeValues[0] = min
+            tipSlider.minimumValue = min
+        } else {
+            minTF.text = ""
         }
         
+        if let maxText = maxTF.text, let max = Float(maxText) {
+            tipCalc?.tipRangeValues[2] = max
+            tipSlider.maximumValue = max
+        } else {
+            maxTF.text = ""
+        }
+        
+        tipCalc?.tipRangeValues[1] = round(tipSlider.value / incrementStep) * incrementStep
+        tipSlider.value = (tipCalc?.tipRangeValues[1])!
+        defaultTipLb.text = String(format: "%.0f", tipSlider.value)+"%"
+        
         let defaults = UserDefaults.standard
-        defaults.set(minTip, forKey: "TIP_MIN")
-        defaults.set(maxTip, forKey: "TIP_MAX")
-        defaults.set(defaultTip, forKey: "TIP_DEFAULT")
+        defaults.set(tipCalc?.tipRangeValues[0], forKey: "TIP_MIN")
+        defaults.set(tipCalc?.tipRangeValues[2], forKey: "TIP_MAX")
+        defaults.set(tipCalc?.tipRangeValues[1], forKey: "TIP_DEFAULT")
         defaults.synchronize()
         
     }
