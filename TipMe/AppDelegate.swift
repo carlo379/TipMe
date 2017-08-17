@@ -20,8 +20,19 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     }
 
     func applicationWillResignActive(_ application: UIApplication) {
-        // Sent when the application is about to move from active to inactive state. This can occur for certain types of temporary interruptions (such as an incoming phone call or SMS message) or when the user quits the application and it begins the transition to the background state.
-        // Use this method to pause ongoing tasks, disable timers, and invalidate graphics rendering callbacks. Games should use this method to pause the game.
+        // Get active TipViewController from Navigation Controller
+        let navViewController = self.window?.rootViewController as! UINavigationController
+        let tipViewController = navViewController.viewControllers.first as! TipViewController
+        
+        // Store Bill information on UserDefaults
+        let defaults = UserDefaults.standard
+        defaults.set(tipViewController.billField.text, forKey: K.KeyUserDefault.bill)
+        
+        // Store Time when app became inactive
+        defaults.set(Date(), forKey: K.KeyUserDefault.dateInactive)
+        
+        defaults.synchronize()
+
     }
 
     func applicationDidEnterBackground(_ application: UIApplication) {

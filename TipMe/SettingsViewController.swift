@@ -22,13 +22,13 @@ class SettingsViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        if  let min = tipCalc?.tipRangeValues[0],
-            let def = tipCalc?.tipRangeValues[1],
-            let max = tipCalc?.tipRangeValues[2] {
+        if  let min = tipCalc?.tipRangeValues[TipRange.min.rawValue],
+            let def = tipCalc?.tipRangeValues[TipRange.def.rawValue],
+            let max = tipCalc?.tipRangeValues[TipRange.max.rawValue] {
             
-            minTF.text = String(format: "%.0f",min)
-            maxTF.text = String(format: "%.0f",max)
-            defaultTipLb.text = String(format: "%.0f", def)+"%"
+            minTF.text = String(format: K.StringFormat.segmentCtrl, min)
+            maxTF.text = String(format: K.StringFormat.segmentCtrl, max)
+            defaultTipLb.text = String(format: K.StringFormat.segmentCtrl, def)+"%"
         } else {
             _ = navigationController?.popViewController(animated: true)
         }
@@ -37,27 +37,28 @@ class SettingsViewController: UIViewController {
     // MARK: - IBActions
     @IBAction func sliderChanged(_ sender: Any) {
         if let minText = minTF.text, let min = Float(minText) {
-            tipCalc?.tipRangeValues[0] = min
+            tipCalc?.tipRangeValues[TipRange.min.rawValue] = min
             tipSlider.minimumValue = min
         } else {
             minTF.text = ""
         }
         
         if let maxText = maxTF.text, let max = Float(maxText) {
-            tipCalc?.tipRangeValues[2] = max
+            tipCalc?.tipRangeValues[TipRange.max.rawValue] = max
             tipSlider.maximumValue = max
         } else {
             maxTF.text = ""
         }
         
-        tipCalc?.tipRangeValues[1] = round(tipSlider.value / incrementStep) * incrementStep
-        tipSlider.value = (tipCalc?.tipRangeValues[1])!
-        defaultTipLb.text = String(format: "%.0f", tipSlider.value)+"%"
+        tipCalc?.tipRangeValues[TipRange.def.rawValue] = round(tipSlider.value / incrementStep) * incrementStep
+        tipSlider.value = (tipCalc?.tipRangeValues[TipRange.def.rawValue])!
+        defaultTipLb.text = String(format: K.StringFormat.segmentCtrl, tipSlider.value)+"%"
         
         let defaults = UserDefaults.standard
-        defaults.set(tipCalc?.tipRangeValues[0], forKey: "TIP_MIN")
-        defaults.set(tipCalc?.tipRangeValues[2], forKey: "TIP_MAX")
-        defaults.set(tipCalc?.tipRangeValues[1], forKey: "TIP_DEFAULT")
+        defaults.set(tipCalc?.tipRangeValues[TipRange.min.rawValue], forKey: K.KeyUserDefault.min)
+        defaults.set(tipCalc?.tipRangeValues[TipRange.def.rawValue], forKey: K.KeyUserDefault.def)
+        defaults.set(tipCalc?.tipRangeValues[TipRange.max.rawValue], forKey: K.KeyUserDefault.max)
+
         defaults.synchronize()
         
     }

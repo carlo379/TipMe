@@ -8,6 +8,8 @@
 
 /* Begin PBXBuildFile section */
 		0723AA341F451312007D2EB1 /* testViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0723AA331F451312007D2EB1 /* testViewController.swift */; };
+		0723AA361F453A00007D2EB1 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0723AA351F453A00007D2EB1 /* Constants.swift */; };
+		0723AA381F4562CB007D2EB1 /* Float_Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0723AA371F4562CB007D2EB1 /* Float_Ext.swift */; };
 		074ED58F1F44159D006B623C /* TipViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 074ED58E1F44159D006B623C /* TipViewController.swift */; };
 		074ED5911F441659006B623C /* SettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 074ED5901F441659006B623C /* SettingsViewController.swift */; };
 		074ED5931F4416B4006B623C /* Help.swift in Sources */ = {isa = PBXBuildFile; fileRef = 074ED5921F4416B4006B623C /* Help.swift */; };
@@ -31,6 +33,8 @@
 
 /* Begin PBXFileReference section */
 		0723AA331F451312007D2EB1 /* testViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = testViewController.swift; sourceTree = "<group>"; };
+		0723AA351F453A00007D2EB1 /* Constants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
+		0723AA371F4562CB007D2EB1 /* Float_Ext.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Float_Ext.swift; sourceTree = "<group>"; };
 		074ED58E1F44159D006B623C /* TipViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TipViewController.swift; sourceTree = "<group>"; };
 		074ED5901F441659006B623C /* SettingsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingsViewController.swift; sourceTree = "<group>"; };
 		074ED5921F4416B4006B623C /* Help.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Help.swift; sourceTree = "<group>"; };
@@ -136,6 +140,8 @@
 				079A9F461F43E9BC00B9B610 /* AppDelegate.swift */,
 				079A9F521F43E9BC00B9B610 /* Info.plist */,
 				074ED5921F4416B4006B623C /* Help.swift */,
+				0723AA351F453A00007D2EB1 /* Constants.swift */,
+				0723AA371F4562CB007D2EB1 /* Float_Ext.swift */,
 			);
 			name = "Supporting Files";
 			sourceTree = "<group>";
@@ -245,10 +251,12 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				0723AA381F4562CB007D2EB1 /* Float_Ext.swift in Sources */,
 				0723AA341F451312007D2EB1 /* testViewController.swift in Sources */,
 				074ED5931F4416B4006B623C /* Help.swift in Sources */,
 				079A9F791F43EF6200B9B610 /* TipCalc.swift in Sources */,
 				074ED58F1F44159D006B623C /* TipViewController.swift in Sources */,
+				0723AA361F453A00007D2EB1 /* Constants.swift in Sources */,
 				079A9F471F43E9BC00B9B610 /* AppDelegate.swift in Sources */,
 				074ED5911F441659006B623C /* SettingsViewController.swift in Sources */,
 			);

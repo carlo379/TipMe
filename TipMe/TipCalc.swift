@@ -8,12 +8,6 @@
 
 import Foundation
 
-enum TipRange {
-    case min(Float)
-    case def(Float)
-    case max(Float)
-}
-
 class TipCalc {
     
     /// Array of Float values representing the possible tips
@@ -44,9 +38,9 @@ class TipCalc {
      - Returns: Void
      */
     func setTipRangeValues(min:Float, def:Float, max:Float){
-        tipRangeValues.insert(min, at: 0)
-        tipRangeValues.insert(def, at: 1)
-        tipRangeValues.insert(max, at: 2)
+        tipRangeValues.insert(min, at: TipRange.min.rawValue)
+        tipRangeValues.insert(def, at: TipRange.def.rawValue)
+        tipRangeValues.insert(max, at: TipRange.max.rawValue)
     }
 
     /**
