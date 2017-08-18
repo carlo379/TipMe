@@ -11,7 +11,7 @@ import Foundation
 class TipCalc {
     
     /// Array of Float values representing the possible tips
-    var tipRangeValues = [Float]()
+    var tipRangeValues = [Float?](repeating: nil, count: 4)
     
     /**
      Initializes a new Tip Calculator with Minimum, Default and Maximum tip values
@@ -38,9 +38,9 @@ class TipCalc {
      - Returns: Void
      */
     func setTipRangeValues(min:Float, def:Float, max:Float){
-        tipRangeValues.insert(min, at: TipRange.min.rawValue)
-        tipRangeValues.insert(def, at: TipRange.def.rawValue)
-        tipRangeValues.insert(max, at: TipRange.max.rawValue)
+        tipRangeValues[TipRange.min.rawValue] = min
+        tipRangeValues[TipRange.def.rawValue] = def
+        tipRangeValues[TipRange.max.rawValue] = max
     }
 
     /**

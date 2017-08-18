@@ -12,6 +12,7 @@ enum TipRange:Int {
     case min
     case def
     case max
+    case rand
 }
 
 struct K {
@@ -27,6 +28,8 @@ struct K {
         static let max = "TIP_MAX"
         static let bill = "LAST_BILL"
         static let dateInactive = "DATE_BECAME_INACTIVE"
+        static let selectedTheme = "SELECTED_THEME"
+
     }
     
     struct Segue {
@@ -35,7 +38,7 @@ struct K {
     
     struct StringFormat {
         static let currency = "$%.2f"
-        static let segmentCtrl = "%.0f"
+        static let tipLabels = "%.0f"
     }
     
     struct Time {
@@ -44,5 +47,9 @@ struct K {
     
     struct Currency {
         static let error = "-.--"
+    }
+    
+    struct Percentage {
+        static let unknown = "???"
     }
 }
