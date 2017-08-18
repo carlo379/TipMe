@@ -9,6 +9,7 @@
 import XCTest
 @testable import TipMe
 
+// MARK: - Tip Calculator Model Tests
 class TipMeTests: XCTestCase {
     var tipCalc:TipCalc?
     

@@ -8,10 +8,12 @@
 
 import UIKit
 
+// MARK: - TipCalculatorThemeDelegate Protocol Interface
 protocol TipCalculatorThemeDelegate: class {
     func themeChanged(toTheme theme:Theme)
 }
 
+// MARK: - SettingsViewController Class
 class SettingsViewController: UIViewController {
     // MARK: - Properties
     @IBOutlet weak var minTF: UITextField!
@@ -24,12 +26,13 @@ class SettingsViewController: UIViewController {
     @IBOutlet weak var maxLb: UILabel!
     @IBOutlet weak var themeLb: UILabel!
     
+    @IBOutlet weak var themeSC: UISegmentedControl!
+    @IBOutlet var backgroundView: UIView!
+    
     var tipCalc:TipCalc?
     let incrementStep = Float(1)
     
-    @IBOutlet weak var themeSC: UISegmentedControl!
-    @IBOutlet var backgroundView: UIView!
-    // MARK: Protocol Delegate
+    // Protocol Delegate
     weak var delegate: TipCalculatorThemeDelegate?
     
     // MARK: - View Controller Life Cycle
@@ -89,6 +92,7 @@ class SettingsViewController: UIViewController {
         }
     }
     
+    // MARK: - View Controller Helper Functions
     private func themeChanged(toTheme theme:Theme){
         backgroundView.backgroundColor = theme.mainColor
         themeSC.backgroundColor = theme.mainColor

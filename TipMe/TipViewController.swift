@@ -11,6 +11,8 @@ import GameKit
 
 class TipViewController: UIViewController {
     // MARK: - Properties
+    @IBOutlet var backgroundView: UIView!
+
     @IBOutlet weak var tipLabel: UILabel!
     @IBOutlet weak var totalLabel: UILabel!
     @IBOutlet weak var billField: UITextField!
@@ -25,8 +27,6 @@ class TipViewController: UIViewController {
     
     @IBOutlet weak var settingBtn: UIBarButtonItem!
     
-    
-    // Tip Labels
     @IBOutlet weak var sadLb: UILabel!
     @IBOutlet weak var okLb: UILabel!
     @IBOutlet weak var happyLb: UILabel!
@@ -44,12 +44,10 @@ class TipViewController: UIViewController {
     var selectedBtn: UIButton? {
         didSet {
             if oldValue == nil {
-                okLb.font = UIFont.systemFont(ofSize:12)
+                okLb.font = UIFont.systemFont(ofSize:K.FontSize.regular)
             }
         }
     }
-    
-    @IBOutlet var backgroundView: UIView!
     
     // MARK: - View Controller Life Cycle
     override func viewDidLoad() {
@@ -89,12 +87,10 @@ class TipViewController: UIViewController {
     
     // MARK: - IBActions
     @IBAction func calculateTip(_ sender: AnyObject) {
-
-        // Animate Selection of Buttons
-        if sender is UIButton {
-            animateSelection(ofButton:sender as! UIButton)
-        }
         
+        // Clear Random Label in preparation for new value
+        self.randLb.text = K.Percentage.unknown
+
         var percentage:Float!   // Unwrapped because all possible cases covered in switch
         
         switch sender.tag {
@@ -118,6 +114,10 @@ class TipViewController: UIViewController {
         tipLabel.text = tip.asLocalizedCurrency
         totalLabel.text = total.asLocalizedCurrency
         
+        // Animate Selection of Buttons
+        if sender is UIButton {
+            animateSelection(ofButton:sender as! UIButton)
+        }
     }
     
      // MARK: - Navigation
@@ -127,6 +127,8 @@ class TipViewController: UIViewController {
                 
                 // Inject 'tipCalc' into settings view controller
                 settingsVC.tipCalc = tipCalc
+                
+                // Setting self as delegate for TipCalculatorThemeDelegate
                 settingsVC.delegate = self
             }
         }
@@ -161,7 +163,7 @@ class TipViewController: UIViewController {
             
             if let diff = Calendar.current.dateComponents([.minute], from: dateInactive, to: Date()).minute, diff < K.Time.rememberBill {
                 billField.text = bill
-                calculateTip(self)
+                calculateTip(billField)
             } else {
                 defaults.removeObject(forKey:K.KeyUserDefault.dateInactive)
                 defaults.removeObject(forKey:K.KeyUserDefault.bill)
@@ -170,6 +172,7 @@ class TipViewController: UIViewController {
     }
     
     private func randTip()->Float {
+        // Get random tip number from default to maximum tip range
         let min = Int(tipCalc.tipRangeValues[TipRange.def.rawValue]!)
         let max = Int(tipCalc.tipRangeValues[TipRange.max.rawValue]!)
         
@@ -186,20 +189,18 @@ class TipViewController: UIViewController {
             let selBtn = self.selectedBtn,
             let label = self.tipLabels?[selBtn.tag] {
             
-            UIView.animate(withDuration: 0.5, animations: {
+            UIView.animate(withDuration: K.AnimationTime.iconSelect, animations: {
                 
                 selBtn.frame = frame
-                label.font = UIFont.systemFont(ofSize: 12)
+                label.font = UIFont.systemFont(ofSize: K.FontSize.regular)
                 
             }, completion: { (done) in
                 self.selectedBtn = button
                 self.selectedBtnFrame = regFrame
-                if selBtn.tag == TipRange.rand.rawValue {
-                    self.randLb.text = K.Percentage.unknown
-                }
             })
         }
 
+        // Animation Stages
         let deltaSmall = CGFloat(2)
         let smallFrame = CGRect(x: regFrame.origin.x + deltaSmall,
                                 y: regFrame.origin.y + deltaSmall,
@@ -219,38 +220,39 @@ class TipViewController: UIViewController {
                                     height: regFrame.height + (deltaHighlight * 2))
 
         // Animate in stages
-        UIView.animateKeyframes(withDuration: 0.5, delay: 0, options: .calculationModeCubic, animations: {
+        UIView.animateKeyframes(withDuration: K.AnimationTime.iconSelect, delay: 0, options: .calculationModeCubic, animations: {
             
-            UIView.addKeyframe(withRelativeStartTime: 0.0, relativeDuration: (0.5/3)) {
+            UIView.addKeyframe(withRelativeStartTime: K.AnimationTime.iconStep1Start, relativeDuration: K.AnimationTime.iconStepsDuration) {
                 button.frame = smallFrame
             }
             
-            UIView.addKeyframe(withRelativeStartTime: (0.5/3), relativeDuration: (0.5/3)) {
+            UIView.addKeyframe(withRelativeStartTime: K.AnimationTime.iconStep2Start, relativeDuration: K.AnimationTime.iconStepsDuration) {
                 button.frame = largeFrame
             }
             
-            UIView.addKeyframe(withRelativeStartTime: (1/3), relativeDuration: (0.5/3)) {
+            UIView.addKeyframe(withRelativeStartTime: K.AnimationTime.iconStep3Start, relativeDuration: K.AnimationTime.iconStepsDuration) {
                 button.frame = highlightFrame
             }
             
         }, completion: { (done) in
 
-            
             self.selectedBtn = button
             self.selectedBtnFrame = regFrame
             
             if let label = self.tipLabels?[button.tag] {
                 
                 DispatchQueue.main.async {
-                    label.font = UIFont.boldSystemFont(ofSize: 16)
+                    label.font = UIFont.boldSystemFont(ofSize: K.FontSize.big)
                 }
             }
         })
     }
 }
 
+// MARK: - TipCalculatorThemeDelegate Methods
 extension TipViewController: TipCalculatorThemeDelegate {
     
+    // Change Theme of app (Light / Dark)
     func themeChanged(toTheme theme:Theme){
         // Bkg Colors
         backgroundView.backgroundColor = theme.mainColor

@@ -8,6 +8,7 @@
 
 import Foundation
 
+// MARK: - Tip Calculator Model
 class TipCalc {
     
     /// Array of Float values representing the possible tips
