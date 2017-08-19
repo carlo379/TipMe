@@ -24,7 +24,7 @@ The following **additional** features are implemented:
 - [X] Added button to randomly select a tip from the Default value to the Maximum value established by the user on the settings controller.
 - [X] Used the Model-View-Controller Architecture for the app.  Where the model functionality was separated from the UI
 - [X] Wrote tests for the Tip Calculator model.
-- [X] Added functionality to change the Theme of the app.  User can select a Light or Dark theme in the settings View Controller.
+- [X] Added functionality to change the Theme of the app.  The user can select a Light or Dark theme in the settings View Controller.
 - [X] Changed the Settings button for a Settings Icon.
 
 ## Video Walkthrough 
@@ -41,7 +41,7 @@ As part of your pre-work submission, please reflect on the app and answer the fo
 
 **Question 1**: "What are your reactions to the iOS app development platform so far? How would you describe outlets and actions to another developer? Bonus: any idea how they are being implemented under the hood? (It might give you some ideas if you right-click on the Storyboard and click Open As->Source Code")
 
-**Answer:** I like the platform because it provides all of the tools you need in order to develop a basic application.  I would explain outlets as properties of a class, that are connected to a storyboard or a xib from Interface Builder.  The developer can modify these properties graphicaly from Xcode IB.  An action is a message sent to another object when an event occurres (eg: UIButton Pressed, UISlided Moved, etc). "IBAction" keyword is used in the class to notify Interface Builder of this connection.  Under the hood this is implemented using XML file as a hierarchi of key-value elements that describe objects properties in Interface Builder.
+**Answer:** I like the platform because it provides all of the tools you need in order to develop a basic application.  I would explain outlets as properties of a class, that are connected to a storyboard or a xib from Interface Builder.  The developer can modify these properties graphically from Xcode IB.  An action is a message sent to another object when an event occurs (eg: UIButton Pressed, UISlided Moved, etc). "IBAction" keyword is used in the class to notify Interface Builder of this connection.  Under the hood, this is implemented using XML file as a hierarchy of key-value elements that describe objects properties in Interface Builder.
 
 Question 2: "Swift uses [Automatic Reference Counting](https://developer.apple.com/library/content/documentation/Swift/Conceptual/Swift_Programming_Language/AutomaticReferenceCounting.html#//apple_ref/doc/uid/TP40014097-CH20-ID49) (ARC), which is not a garbage collector, to manage memory. Can you explain how you can get a strong reference cycle for closures? (There's a section explaining this concept in the link, how would you summarize as simply as possible?)" 
 
