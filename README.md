@@ -43,14 +43,14 @@ As part of your pre-work submission, please reflect on the app and answer the fo
 
 **Answer:** I like the platform because it provides all of the tools you need in order to develop a basic application.  I would explain outlets as properties of a class, that are connected to a storyboard or a xib from Interface Builder.  The developer can modify these properties graphicaly from Xcode IB.  An action is a message sent to another object when an event occurres (eg: UIButton Pressed, UISlided Moved, etc). "IBAction" keyword is used in the class to notify Interface Builder of this connection.  Under the hood this is implemented using XML file as a hierarchi of key-value elements that describe objects properties in Interface Builder.
 
-Question 2: "Swift uses [Automatic Reference Counting](https://developer.apple.com/library/content/documentation/Swift/Conceptual/Swift_Programming_Language/AutomaticReferenceCounting.html#//apple_ref/doc/uid/TP40014097-CH20-ID49) (ARC), which is not a garbage collector, to manage memory. Can you explain how you can get a strong reference cycle for closures? (There's a section explaining this concept in the link, how would you summarize as simply as possible?)"
+Question 2: "Swift uses [Automatic Reference Counting](https://developer.apple.com/library/content/documentation/Swift/Conceptual/Swift_Programming_Language/AutomaticReferenceCounting.html#//apple_ref/doc/uid/TP40014097-CH20-ID49) (ARC), which is not a garbage collector, to manage memory. Can you explain how you can get a strong reference cycle for closures? (There's a section explaining this concept in the link, how would you summarize as simply as possible?)" 
 
-**Answer:** [Enter your answer here in a paragraph or two].
+**Answer:** This could happen if a property of a class holds a reference to a closure and that closure captures an instance of that class.  Since a closures and classes are reference types, they can create a strong reference cycle between them.  To prevent this a developer can use a capture list were 'weak' or 'unowned' keywords are used on the instances that are going to be captured.
 
 
 ## License
 
-    Copyright [yyyy] [name of copyright owner]
+    Copyright 2017 Carlos Martinez
 
     Licensed under the Apache License, Version 2.0 (the "License");
     you may not use this file except in compliance with the License.
