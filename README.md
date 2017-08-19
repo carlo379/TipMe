@@ -4,7 +4,7 @@
 
 Submitted by: **Carlos Martinez**
 
-Time spent: **18** hours spent in total
+Time spent: **16** hours spent in total
 
 ## User Stories
 
